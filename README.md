@@ -1,4 +1,4 @@
-# Pollination Streamlit
+# Pollination IO
 
 A [Pollination](https://pollination.cloud) extension to facilitate working with Pollination SDK and apps.
 
