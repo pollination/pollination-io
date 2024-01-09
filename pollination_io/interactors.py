@@ -146,10 +146,11 @@ class Job:
 
         return runs
 
-    # TODO: add support for passing pagination values
-    def list_artifacts(self, path: str = None) -> t.List['Artifact']:
+    def list_artifacts(
+            self, path: str = None, page: int = 1,
+            per_page: int = 25) -> t.List['Artifact']:
         response = self.job_api.list_job_artifacts(
-            self.owner, self.project, self.id, path
+            self.owner, self.project, self.id, path, page, per_page
         )
         return [
             Artifact(job=self, **artifact)

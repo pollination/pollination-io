@@ -44,8 +44,11 @@ class JobsAPI(APIBase):
         )
         return self.client.download_artifact(signed_url)
 
-    def list_job_artifacts(self, owner: str, project: str, job_id: str, path: str = None) -> t.List[t.Dict[str, t.Any]]:
+    def list_job_artifacts(
+        self, owner: str, project: str, job_id: str, path: str = None,
+        page: int = 1, per_page: int = 25
+            ) -> t.List[t.Dict[str, t.Any]]:
         return self.client.get(
             path=f'/projects/{owner}/{project}/jobs/{job_id}/artifacts',
-            params={'path': path}
+            params={'path': path, 'per_page': per_page, 'page': page}
         )
