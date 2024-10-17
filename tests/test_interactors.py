@@ -94,7 +94,7 @@ def test_run(job_id, run_id, single_run_from_api, run_status, recipe_interface):
 def test_recipe(get_recipe, recipe):
     r = Recipe('ladybug-tools', 'annual-daylight', '0.8.2-viz')
 
-    assert r.source_url == 'https://api.pollination.cloud/registries/ladybug-tools/recipe/annual-daylight/0.8.2-viz'
+    assert r.source_url == 'https://api.pollination.solutions/registries/ladybug-tools/recipe/annual-daylight/0.8.2-viz'
     assert r.api_object == recipe
     assert r.input_artifacts == ['model', 'schedule', 'wea']
     assert r.input_parameters == ['cpu-count', 'grid-filter',

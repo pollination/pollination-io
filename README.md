@@ -1,6 +1,6 @@
 # Pollination IO
 
-A [Pollination](https://pollination.cloud) extension to facilitate working with Pollination SDK and apps.
+A [Pollination](https://pollination.solutions) extension to facilitate working with Pollination SDK and apps.
 
 ## Installation
 

@@ -5,7 +5,7 @@ from io import BytesIO
 import requests
 
 DEFAULT_HOST = os.getenv('POLLINATION_API_URL',
-                         'https://api.pollination.cloud')
+                         'https://api.pollination.solutions')
 
 
 class ApiClient():
