@@ -11,7 +11,7 @@ setuptools.setup(
     use_scm_version=True,
     setup_requires=['setuptools_scm'],
     author="Pollination",
-    author_email="info@pollination.cloud",
+    author_email="info@pollination.solutions",
     description="A Pollination extension to facilitate working with Pollination SDK.",
     long_description=long_description,
     long_description_content_type="text/markdown",

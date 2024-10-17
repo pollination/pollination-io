@@ -51,12 +51,12 @@ def recipe(assets: Path):
 
 @pytest.fixture
 def default_host():
-    return 'https://api.pollination.cloud'
+    return 'https://api.pollination.solutions'
 
 
 @pytest.fixture
 def custom_host():
-    return 'https://api.staging.pollination.cloud'
+    return 'https://api.staging.pollination.solutions'
 
 
 @pytest.fixture

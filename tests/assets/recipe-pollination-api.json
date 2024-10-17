@@ -52,7 +52,7 @@
       "hash": null,
       "alias": null,
       "tag": "0.14.3",
-      "source": "https://api.pollination.cloud/registries/ladybug-tools"
+      "source": "https://api.pollination.solutions/registries/ladybug-tools"
     },
     {
       "type": "Dependency",
@@ -62,7 +62,7 @@
       "hash": null,
       "alias": null,
       "tag": "0.2.4",
-      "source": "https://api.pollination.cloud/registries/ladybug-tools"
+      "source": "https://api.pollination.solutions/registries/ladybug-tools"
     }
   ],
   "flow": [
