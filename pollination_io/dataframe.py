@@ -120,9 +120,9 @@ class RunsDataFrame:
 
     @staticmethod
     def _get_value(row) -> any:
-        if row['value'] is not np.NAN:
+        if row['value'] is not np.nan:
             return row['value']
-        if row['source'] is not np.NAN:
+        if row['source'] is not np.nan:
             # print(row['source'])
             return row['source']['path']
         else:
