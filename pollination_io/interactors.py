@@ -51,7 +51,7 @@ class Recipe:
         res = self.recipe_api.add_to_project(
             self.owner,
             self.name,
-            project_slug,
+            self.project_slug,
             self.tag)
         return res
 
@@ -114,15 +114,15 @@ class Job:
 
     @property
     def spec(self) -> QbJob:
-        return QbJob.parse_obj(self.api_object['spec'])
+        return QbJob.model_validate(self.api_object['spec'])
 
     @property
     def status(self) -> JobStatus:
-        return JobStatus.parse_obj(self.api_object['status'])
+        return JobStatus.model_validate(self.api_object['status'])
 
     @property
     def recipe_interface(self) -> RecipeInterface:
-        return RecipeInterface.parse_obj(self.api_object['recipe'])
+        return RecipeInterface.model_validate(self.api_object['recipe'])
 
     @property
     def recipe(self) -> Recipe:
@@ -213,7 +213,8 @@ class NewJob:
             run_args = []
             for k, v in args.items():
                 if k in self.recipe.input_artifacts:
-                    run_args.append(JobPathArgument.parse_obj({
+                    # Pydantic V2: parse_obj -> model_validate
+                    run_args.append(JobPathArgument.model_validate({
                         'name': k,
                         'source': {
                             'type': 'ProjectFolder',
@@ -265,11 +266,11 @@ class Run:
 
     @property
     def status(self) -> RunStatus:
-        return RunStatus.parse_obj(self.api_object['status'])
+        return RunStatus.model_validate(self.api_object['status'])
 
     @property
     def recipe_interface(self) -> RecipeInterface:
-        return RecipeInterface.parse_obj(self.api_object['recipe'])
+        return RecipeInterface.model_validate(self.api_object['recipe'])
 
     @property
     def recipe(self) -> Recipe:
