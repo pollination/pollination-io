@@ -3,13 +3,10 @@ from pathlib import Path
 
 import pytest
 import requests_mock
-from pydantic import BaseConfig
 from queenbee.job import Job, JobStatus, RunStatus
 from queenbee.recipe import RecipeInterface
 from queenbee.recipe.recipe import Recipe
 from requests import Request
-
-BaseConfig.allow_population_by_field_name = True
 
 
 @pytest.fixture
@@ -76,22 +73,22 @@ def run_id(single_run):
 
 @pytest.fixture
 def job_spec(single_job):
-    return Job.parse_obj(single_job['spec'])
+    return Job.model_validate(single_job['spec'])
 
 
 @pytest.fixture
 def job_status(single_job):
-    return JobStatus.parse_obj(single_job['status'])
+    return JobStatus.model_validate(single_job['status'])
 
 
 @pytest.fixture
 def recipe_interface(single_job):
-    return RecipeInterface.parse_obj(single_job['recipe'])
+    return RecipeInterface.model_validate(single_job['recipe'])
 
 
 @pytest.fixture
 def run_status(single_run):
-    return RunStatus.parse_obj(single_run['status'])
+    return RunStatus.model_validate(single_run['status'])
 
 
 @pytest.fixture
@@ -182,7 +179,7 @@ def single_job_from_api(default_host, job_id, single_job):
 @pytest.fixture
 def create_job(default_host, job_spec, job_create_response):
     def additional_matcher(request: Request):
-        return json.loads(request.text) == job_spec.dict()
+        return json.loads(request.text) == job_spec.model_dump(mode='json')
 
     with requests_mock.Mocker() as m:
         m.post(
@@ -198,7 +195,7 @@ def get_recipe(default_host, recipe):
     with requests_mock.Mocker() as m:
         m.get(
             f'{default_host}/registries/ladybug-tools/recipe/annual-daylight/0.8.2-viz/json',
-            json=recipe.dict(),
+            json=recipe.model_dump(mode='json', by_alias=True),
         )
         yield
 
@@ -206,12 +203,12 @@ def get_recipe(default_host, recipe):
 @pytest.fixture
 def get_recipe_and_create_job(default_host, recipe, job_spec, job_create_response):
     def additional_matcher(request: Request):
-        return json.loads(request.text) == job_spec.dict()
+        return json.loads(request.text) == job_spec.model_dump(mode='json')
 
     with requests_mock.Mocker() as m:
         m.get(
             f'{default_host}/registries/ladybug-tools/recipe/annual-daylight/0.8.2-viz/json',
-            json=recipe.dict(),
+            json=recipe.model_dump(mode='json'),
         )
         m.post(
             f'{default_host}/projects/ladybug-tools/demo/jobs',

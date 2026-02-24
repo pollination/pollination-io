@@ -28,7 +28,7 @@ class JobsAPI(APIBase):
     def create_job(self, owner: str, project: str, job: QbJob) -> str:
         res = self.client.post(
             path=f'/projects/{owner}/{project}/jobs',
-            json=job.dict()
+            json=job.model_dump()
         )
         return res['id']
 
