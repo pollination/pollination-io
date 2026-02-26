@@ -208,7 +208,7 @@ def get_recipe_and_create_job(default_host, recipe, job_spec, job_create_respons
     with requests_mock.Mocker() as m:
         m.get(
             f'{default_host}/registries/ladybug-tools/recipe/annual-daylight/0.8.2-viz/json',
-            json=recipe.model_dump(mode='json'),
+            json=recipe.model_dump(mode='json', by_alias=True),
         )
         m.post(
             f'{default_host}/projects/ladybug-tools/demo/jobs',
